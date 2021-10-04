@@ -1,11 +1,22 @@
-# Project Name
+# FMI Materials
 
-Project Description
+## Links
 
-## Live Version
+* [FMI](https://fmi.uni-sofia.bg/)
+* [SUSI](https://susi.uni-sofia.bg/)
+* [Moodle](https://learn.fmi.uni-sofia.bg/)
+* [EMAIL](https://email.uni-sofia.bg/)
 
-This page is not yet deployed.
-<!--This page is currently deployed. [View the live website.]()-->
+## Repository Structure
+
+```
+├── materials
+│   ├── (course)
+│   │   ├── (semester)
+│   │   │   ├── (subject)
+│   │   │   │   ├── (number of lesson)
+│   │   │   │   │   ├── (lesson contents)
+```
 
 ## Feedback and Bugs
 
