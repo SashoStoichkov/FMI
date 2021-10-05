@@ -1,12 +1,5 @@
 # FMI Materials
 
-## Links
-
-* [FMI](https://fmi.uni-sofia.bg/)
-* [SUSI](https://susi.uni-sofia.bg/)
-* [Moodle](https://learn.fmi.uni-sofia.bg/)
-* [EMAIL](https://email.uni-sofia.bg/)
-
 ## Repository Structure
 
 ```
