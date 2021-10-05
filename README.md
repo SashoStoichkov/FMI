@@ -10,7 +10,7 @@
 ## Repository Structure
 
 ```
-├── materials
+├── "materials"
 │   ├── (course)
 │   │   ├── (semester)
 │   │   │   ├── (subject)
