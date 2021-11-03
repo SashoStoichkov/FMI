@@ -160,6 +160,158 @@ void enumZad3() {
     }
 }
 
+void zad5() {
+    int n;
+    cin >> n;
+
+    double result = 0;
+
+    for (int i = 1; i <= n; i++) {
+        result += 1.0 / pow(i, i);
+    }
+
+    cout << "result = " << result << endl;
+}
+
+void zad6() {
+    int x, n;
+    cin >> x >> n;
+
+    double result = 1;
+
+    for (int i = 1; i < n; i++) {
+        int fact = 1;
+
+        for (int j = 1; j <= 2*i; j++) {
+            fact *= j;
+        }
+
+        result += pow(-1, i) * (pow(x, 2*i) / fact);
+    }
+
+    cout << result << endl;
+}
+
+void zad7() {
+    int n;
+    cin >> n;
+
+    // check if n is prime
+    bool isPrime = true;
+
+    for (int i = 2; i <= sqrt(n); i++) {
+        if (n % i == 0) {
+            isPrime = false;
+            break;
+        }
+    }
+
+    cout << boolalpha << "isPrime = " << isPrime << endl;
+}
+
+void zad8() {
+    int n;
+    cin >> n;
+
+    // print all factors of n
+    for (int i = 1; i <= n; i++) {
+        if (n % i == 0) {
+            cout << i << " ";
+        }
+    }
+
+    cout << endl;
+}
+
+void zad9() {
+    int n;
+    cin >> n;
+
+    // prime factorization of n
+    for (int i = 2; i <= n; i++) {
+        if (n % i == 0) {
+            cout << i << " ";
+            n /= i;
+            i--;
+        }
+    }
+
+    cout << endl;
+}
+
+void zad10() {
+    int n;
+    cin >> n;
+    n = abs(n);
+
+    // sum of digits of n
+    int sum = 0;
+
+    while (n > 0) {
+        sum += n % 10;
+        n /= 10;
+    }
+
+    cout << "sum = " << sum << endl;
+}
+
+void zad11() {
+    int n;
+    cin >> n;
+
+    // int a with reversed digits of n
+    int a = 0;
+
+    while (n > 0) {
+        a = a * 10 + n % 10;
+        n /= 10;
+    }
+
+    cout << "a = " << a << endl;
+}
+
+void zad12() {
+    int x;
+    cin >> x;
+
+    if (-pow(2, 31) <= x && x <= pow(2, 31) - 1) {
+        // check if x is palindrome
+        bool isPalindrome = true;
+
+        int n = x;
+        int a = 0;
+
+        while (n > 0) {
+            a = a * 10 + n % 10;
+            n /= 10;
+        }
+
+        if (x != a) {
+            isPalindrome = false;
+        }
+
+        cout << boolalpha << "isPalindrome = " << isPalindrome << endl;
+    } else {
+        cout << "error" << endl;
+    }
+}
+
+void zad13() {
+    int n, m;
+    cin >> n >> m;
+
+    // print greatest common divisor of n and m
+    int gcd = 1;
+
+    for (int i = 1; i <= n && i <= m; i++) {
+        if (n % i == 0 && m % i == 0) {
+            gcd = i;
+        }
+    }
+
+    cout << "gcd = " << gcd << endl;
+}
+
 int main() {
     // zad1();
     // zad2();
@@ -167,6 +319,16 @@ int main() {
     // zad4();
 
     // enumZad3();
+
+    // zad5();
+    // zad6();
+    // zad7();
+    // zad8();
+    // zad9();
+    // zad10();
+    // zad11();
+    // zad12();
+    // zad13();
 
     return 0;
 }
