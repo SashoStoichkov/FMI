@@ -2,6 +2,8 @@
 #include <cmath>
 using namespace std;
 
+// https://bit.ly/25OCT2021
+
 void zad1() {
     double a, b, c;
     cin >> a >> b >> c;
@@ -160,6 +162,74 @@ void zad7() {
     }
 }
 
+struct Point {
+    double x, y;
+};
+
+bool operator==(Point a, Point b) {
+    return a.x == b.x && a.y == b.y;
+}
+
+struct Rectangle {
+    Point p1, p2, p3, p4;
+};
+
+bool operator==(Rectangle a, Rectangle b) {
+    return a.p1 == b.p1 && a.p2 == b.p2 && a.p3 == b.p3 && a.p4 == b.p4;
+}
+
+bool operator<=(Rectangle a, Rectangle b) {
+    return (a.p1.x >= b.p1.x && a.p1.y >= b.p1.y) &&
+           (a.p2.x <= b.p2.x && a.p2.y >= b.p2.y) &&
+           (a.p3.x <= b.p3.x && a.p3.y <= b.p3.y) &&
+           (a.p4.x >= b.p4.x && a.p4.y <= b.p4.y);
+}
+
+Rectangle createRectangle(Point p1, Point p2) {
+    Rectangle r;
+
+    if (p1.x < p2.x) {
+        if (p1.y < p2.y) {
+            r = {p1, {p2.x, p1.y}, p2, {p1.x, p2.y}};
+        } else {
+            r = {{p1.x, p2.y}, p2, {p2.x, p1.y}, p1};
+        }
+    } else {
+        if (p1.y < p2.y) {
+            r = {{p2.x, p1.y}, p1, {p1.x, p2.y}, p2};
+        } else {
+            r = {p2, {p1.x, p2.y}, p1, {p2.x, p1.y}};
+        }
+    }
+
+    return r;
+}
+
+void zad8() {
+    Point a, b, c, d;
+    cin >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y >> d.x >> d.y;
+
+    // rectangle r1 with diagonal a-b
+    Rectangle r1 = createRectangle(a, b);
+
+    // rectangle r2 with diagonal c-d
+    Rectangle r2 = createRectangle(c, d);
+
+    if (r1 == r2) {
+        cout << "r1 and r2 are equal" << endl;
+    } else {
+        cout << "r1 and r2 are not equal" << endl;
+
+        if (r1 <= r2) {
+            cout << "r1 is inside r2" << endl;
+        } else if (r2 <= r1) {
+            cout << "r2 is inside r1" << endl;
+        } else {
+            cout << "r1 and r2 are not overlapping" << endl;
+        }
+    }
+}
+
 int main() {
     // zad1();
     // zad2();
@@ -168,6 +238,7 @@ int main() {
     // zad5();
     // zad6();
     // zad7();
+    // zad8();
 
     return 0;
 }

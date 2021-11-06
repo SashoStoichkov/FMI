@@ -2,6 +2,8 @@
 #include <cmath>
 using namespace std;
 
+// https://bit.ly/10oct2021
+
 void zad1() {
     double a;
     cout << "a = "; cin >> a;
