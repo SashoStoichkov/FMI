@@ -9,3 +9,6 @@
 
 # Ignore .vscode dir
 .vscode
+
+#Ignore .out files
+!*.out
