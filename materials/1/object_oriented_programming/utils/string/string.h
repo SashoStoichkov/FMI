@@ -3,24 +3,39 @@
 
 class String {
 private:
-  char *str;
-  void copy(const String &s);
-  void free();
+    char *str;
+
+    void copy(const String &other);
+    void free();
 
 public:
-  String(const char *s = "");
-  String(const String &s);
-  ~String();
+    // constructor
+    String(const char *s = "");
 
-  String &operator=(const String &s);
+    // copy constructor
+    String(const String &other);
 
-  void append(const char *s);
-  void append(const String &s);
+    // move constructor
+    String(String &&other);
 
-  void print() const;
-  int length() const;
+    // destructor
+    ~String();
 
-  void pop_back();
+    // copy assignment
+    String &operator=(const String &other);
+
+    // move assignment
+    String &operator=(String &&other);
+
+    // other methods
+    void append(const char *s);
+    void append(const String &s);
+
+    void print() const;
+    int length() const;
+
+    void popBack();
+    void pushBack(const char c);
 };
 
 #endif // __STRING_H__
