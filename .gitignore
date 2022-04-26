@@ -11,4 +11,4 @@
 .vscode
 
 #Ignore .out files
-!*.out
+*.out
