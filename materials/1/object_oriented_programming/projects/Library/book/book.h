@@ -32,12 +32,8 @@ public:
   int getRating();
   ISBN getISBN();
 
-  // filters
-  Book getByAuthor(String author);
-  Book getByTitle(String title);
-  Book getByShortDescription(String shortDescription);
-  Book getByRating(int rating);
-  Book getByISBN(ISBN isbn);
+  // getAtrribute
+  String getAttribute(String attribute);
 };
 
 #endif // __BOOK_H__

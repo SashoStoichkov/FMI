@@ -42,6 +42,8 @@ ISBN::ISBN(String isbn) {
   }
 }
 
+String ISBN::getISBN() { return this->isbn; }
+
 bool ISBN::operator==(const ISBN &isbn) const {
   return this->isbn == isbn.isbn;
 }

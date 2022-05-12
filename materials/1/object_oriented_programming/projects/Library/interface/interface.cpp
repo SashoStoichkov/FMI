@@ -5,6 +5,21 @@ using namespace std;
 
 #include "interface.h"
 
+void log(String action, String isbn) {
+  time_t now = time(0);
+  String dt = String(ctime(&now));
+
+  ofstream logFile("books-db/log.txt", ios::app);
+
+  if (action == "add") {
+    logFile << endl << dt << "- Added book: " << isbn;
+  } else if (action == "remove") {
+    logFile << endl << dt << "- Removed book: " << isbn;
+  }
+
+  logFile.close();
+}
+
 Interface::Interface(String adminPassword) : adminPassword(adminPassword) {}
 
 bool Interface::enterAdminPassword() {
@@ -55,8 +70,19 @@ void Interface::addBook() {
     // ISBN is valid
     ISBN isbn(isbnStr);
 
-    String author, title, contentFileName, shortDescription;
     int rating;
+    cout << "Library(add)> Enter Rating (0-5): ";
+    cin >> rating;
+
+    // ignores the newline character
+    getchar();
+
+    if (rating < 0 || rating > 5) {
+      cout << "Invalid rating" << endl;
+      return;
+    }
+
+    String author, title, contentFileName, shortDescription;
 
     cout << "Library(add)> Enter Author: ";
     cin >> author;
@@ -70,12 +96,6 @@ void Interface::addBook() {
     cout << "Library(add)> Enter Short Description: ";
     cin >> shortDescription;
 
-    cout << "Library(add)> Enter Rating: ";
-    cin >> rating;
-
-    // ignores the newline character
-    getchar();
-
     Book book(author, title, contentFileName, shortDescription, rating, isbn);
 
     String content;
@@ -83,8 +103,6 @@ void Interface::addBook() {
     cin >> content;
 
     String fileDestination = "books-db/";
-    // fileDestination.append(isbnStr);
-    // fileDestination.append("-");
     fileDestination.append(contentFileName);
     fileDestination.append(".txt");
 
@@ -92,20 +110,74 @@ void Interface::addBook() {
     file << content;
     file.close();
 
-    time_t now = time(0);
-    String dt = String(ctime(&now));
+    library.addBook(book);
 
-    ofstream logFile("books-db/log.txt", ios::app);
-    logFile << endl
-            << dt << "- Added book: " << isbnStr << " in file "
-            << contentFileName << ".txt";
-    logFile.close();
+    log("add", isbnStr);
+    cout << "Book added successfully!" << endl;
+  }
+}
+
+void Interface::removeBook() {
+  if (!enterAdminPassword()) {
+    cout << "Access denied!" << endl;
+    return;
+  } else {
+    String isbnStr;
+    cout << "Library(remove)> Enter ISBN: ";
+    cin >> isbnStr;
+
+    try {
+      ISBN isbn(isbnStr);
+    } catch (const ISBNNotValidException &e) {
+      cout << "Invalid ISBN" << endl;
+      return;
+    }
+
+    ISBN isbn(isbnStr);
+
+    if (library.removeBook(isbn)) {
+      log("remove", isbnStr);
+      cout << "Book removed successfully!" << endl;
+    }
+  }
+}
+
+void Interface::sortBooks() {
+  cout << "Choose sorting category (title (t), author (a) or rating (r)): ";
+
+  String sortBy;
+  cin >> sortBy;
+
+  if (sortBy == "t" || sortBy == "a" || sortBy == "r") {
+    cout << "Choose sorting order (ascending (a) or descending (d)): ";
+
+    String order;
+    cin >> order;
+
+    if (order == "a" || order == "d") {
+      cout << "Sorting..." << endl;
+
+      Book *books = library.sortedBy(sortBy, order == "a" ? true : false);
+
+      cout << "Sorted books:" << endl;
+      for (int i = 0; i < library.getNumBooks(); i++) {
+        books[i].printShort();
+      }
+
+    } else {
+      cout << "Invalid order" << endl;
+      return;
+    }
+  } else {
+    cout << "Invalid category" << endl;
+    return;
   }
 }
 
 void Interface::run() {
   // print welcome message
   cout << "Welcome to the library!" << endl;
+  cout << "Type '/help' for available commands." << endl;
 
   bool run = true;
 
@@ -120,8 +192,10 @@ void Interface::run() {
       addBook();
       break;
     case 1: // remove book
+      removeBook();
       break;
     case 2: // sort books
+      sortBooks();
       break;
     case 3: // search books
       break;

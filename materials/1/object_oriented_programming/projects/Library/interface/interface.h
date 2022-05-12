@@ -2,15 +2,16 @@
 #define __INTERFACE_H__
 
 #include "../book/book.h"
-// #include "../command/command.h"
+#include "../library/library.h"
 #include "../myString/string.h"
 
 class Interface {
 private:
   String adminPassword;
+  Library library;
 
-  String commands[8] = {"/add",  "/remove", "/sort",     "/search",
-                        "/book", "/usage",  "/commands", "/exit"};
+  String commands[8] = {"/add",  "/remove", "/sort", "/search",
+                        "/book", "/usage",  "/help", "/exit"};
 
   int getCommandIndex(String command);
 
@@ -23,10 +24,10 @@ private:
   void addBook();
 
   // remove book
-  void removeBook(ISBN isbn);
+  void removeBook();
 
   // sort books
-  void sortBooks(String sortBy);
+  void sortBooks();
 
   // search books
   void searchBooks(String searchBy, String searchFor);

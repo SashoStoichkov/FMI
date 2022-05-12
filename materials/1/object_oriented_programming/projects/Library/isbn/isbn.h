@@ -18,6 +18,8 @@ private:
 public:
   ISBN(String isbn = "");
 
+  String getISBN();
+
   bool operator==(const ISBN &isbn) const;
 };
 

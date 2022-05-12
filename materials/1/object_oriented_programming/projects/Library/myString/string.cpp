@@ -88,6 +88,14 @@ bool String::operator!=(const String &other) const {
   return strcmp(str, other.str) != 0;
 }
 
+bool String::operator<(const String &other) const {
+  return strcmp(str, other.str) < 0;
+}
+
+bool String::operator>(const String &other) const {
+  return strcmp(str, other.str) > 0;
+}
+
 char &String::operator[](const int index) { return str[index]; }
 
 ostream &operator<<(ostream &os, const String &s) { return os << s.str; }

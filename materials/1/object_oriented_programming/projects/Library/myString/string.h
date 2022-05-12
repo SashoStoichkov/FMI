@@ -48,6 +48,10 @@ public:
 
   bool operator!=(const String &other) const;
 
+  bool operator<(const String &other) const;
+
+  bool operator>(const String &other) const;
+
   friend istream &operator>>(istream &is, String &s);
 
   friend ostream &operator<<(ostream &os, const String &s);
