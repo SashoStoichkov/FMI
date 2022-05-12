@@ -48,6 +48,8 @@ String &String::operator=(String &&other) {
   return *this;
 }
 
+char *String::getStr() const { return str; }
+
 void String::append(const char *s) {
   char *tmp = new char[strlen(str) + strlen(s) + 1];
   strcpy(tmp, str);
@@ -90,4 +92,11 @@ char &String::operator[](const int index) { return str[index]; }
 
 ostream &operator<<(ostream &os, const String &s) { return os << s.str; }
 
-istream &operator>>(istream &is, String &s) { return is >> s.str; }
+istream &operator>>(istream &is, String &s) {
+  char line[1024];
+  is.getline(line, 1024);
+
+  strcpy(s.str, line);
+
+  return is;
+}

@@ -3,6 +3,11 @@
 
 #include "../myString/string.h"
 
+class ISBNNotValidException : public std::exception {
+public:
+  ISBNNotValidException() : std::exception() {}
+};
+
 class ISBN {
 private:
   String isbn;

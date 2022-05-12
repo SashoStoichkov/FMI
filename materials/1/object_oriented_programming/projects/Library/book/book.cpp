@@ -1,4 +1,3 @@
-#include <cstring>
 #include <iostream>
 
 using namespace std;
@@ -7,20 +6,9 @@ using namespace std;
 #include "book.h"
 
 Book::Book(String author, String title, String contentFileName,
-           String shortDescription, int rating, String isbn) {
-  this->author = author;
-  this->title = title;
-  this->contentFileName = contentFileName;
-  this->shortDescription = shortDescription;
-  this->rating = rating;
-
-  try {
-    this->isbn = ISBN(isbn);
-  } catch (const char *msg) {
-    cout << msg << endl;
-    exit(1);
-  }
-}
+           String shortDescription, int rating, ISBN isbn)
+    : author(author), title(title), contentFileName(contentFileName),
+      shortDescription(shortDescription), rating(rating), isbn(isbn) {}
 
 bool Book::operator==(const Book &book) const {
   return this->isbn == book.isbn;

@@ -15,11 +15,9 @@ private:
 
 public:
   Book(String author = "", String title = "", String contentFileName = "",
-       String shortDescription = "", int rating = 0, String isbn = "");
+       String shortDescription = "", int rating = 0, ISBN isbn = ISBN("007462542X"));
 
   bool operator==(const Book &book) const;
-
-  void inputContent();
 
   // print info
   void print();

@@ -31,6 +31,8 @@ public:
   String &operator=(String &&other);
 
   // other methods
+  char *getStr() const;
+
   void append(const char *s);
   void append(const String &s);
 

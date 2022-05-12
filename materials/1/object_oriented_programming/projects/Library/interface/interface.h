@@ -2,6 +2,7 @@
 #define __INTERFACE_H__
 
 #include "../book/book.h"
+// #include "../command/command.h"
 #include "../myString/string.h"
 
 class Interface {
@@ -13,12 +14,13 @@ private:
 
   int getCommandIndex(String command);
 
+  bool enterAdminPassword();
+
   void printAllCommands();
   void printUsage(String command);
 
   // add book
-  void addBook(String author, String title, String contentFileName,
-               String shortDescription, int rating, ISBN isbn, String content);
+  void addBook();
 
   // remove book
   void removeBook(ISBN isbn);
