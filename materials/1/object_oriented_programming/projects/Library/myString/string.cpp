@@ -96,6 +96,18 @@ bool String::operator>(const String &other) const {
   return strcmp(str, other.str) > 0;
 }
 
+bool String::contains(const String &s) const {
+  return strstr(str, s.str) != NULL;
+}
+
+String String::toLower() const {
+  String s;
+  for (int i = 0; i < length(); i++) {
+    s.pushBack(tolower(str[i]));
+  }
+  return s;
+}
+
 char &String::operator[](const int index) { return str[index]; }
 
 ostream &operator<<(ostream &os, const String &s) { return os << s.str; }

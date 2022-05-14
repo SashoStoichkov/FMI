@@ -55,6 +55,10 @@ public:
   friend istream &operator>>(istream &is, String &s);
 
   friend ostream &operator<<(ostream &os, const String &s);
+
+  bool contains(const String &s) const;
+
+  String toLower() const;
 };
 
 #endif // __STRING_H__

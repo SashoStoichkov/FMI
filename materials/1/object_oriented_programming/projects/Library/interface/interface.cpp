@@ -32,18 +32,9 @@ bool Interface::enterAdminPassword() {
   return password == adminPassword;
 }
 
-int Interface::getCommandIndex(String command) {
-  for (int i = 0; i < 8; i++) {
-    if (commands[i] == command) {
-      return i;
-    }
-  }
-  return -1;
-}
-
 void Interface::printAllCommands() {
   cout << "Available commands:" << endl;
-  for (int i = 0; i < 8; i++) {
+  for (int i = 0; i < Interface::NUM_COMMANDS; i++) {
     cout << commands[i] << endl;
   }
 }
@@ -67,7 +58,15 @@ void Interface::addBook() {
       return;
     }
 
-    // ISBN is valid
+    // check if book already exists
+    Book check = library.getBook("i", isbnStr);
+
+    if (check.getISBN().getStr() != "0000000000") {
+      cout << "Book already exists!" << endl;
+      return;
+    }
+
+    // ISBN is valid and not in library
     ISBN isbn(isbnStr);
 
     int rating;
@@ -82,7 +81,7 @@ void Interface::addBook() {
       return;
     }
 
-    String author, title, contentFileName, shortDescription;
+    String author, title, contentFileName, description;
 
     cout << "Library(add)> Enter Author: ";
     cin >> author;
@@ -94,9 +93,9 @@ void Interface::addBook() {
     cin >> contentFileName;
 
     cout << "Library(add)> Enter Short Description: ";
-    cin >> shortDescription;
+    cin >> description;
 
-    Book book(author, title, contentFileName, shortDescription, rating, isbn);
+    Book book(author, title, contentFileName, description, rating, isbn);
 
     String content;
     cout << "Library(add)> Enter Content: ";
@@ -174,6 +173,74 @@ void Interface::sortBooks() {
   }
 }
 
+void Interface::searchBook() {
+  cout << "Choose searching category (title (t), author (a), ISBN (i) or "
+          "description (d)): ";
+
+  String searchBy;
+  cin >> searchBy;
+
+  if (searchBy == "t" || searchBy == "a" || searchBy == "i" ||
+      searchBy == "d") {
+    cout << "Enter search term: ";
+
+    String searchFor;
+    cin >> searchFor;
+
+    Book book = library.getBook(searchBy, searchFor);
+
+    if (book.getAuthor() != "") {
+      cout << "Book found:" << endl;
+      book.print();
+    } else {
+      cout << "Book not found" << endl;
+      return;
+    }
+  } else {
+    cout << "Invalid category" << endl;
+    return;
+  }
+}
+
+void Interface::printBook() {
+  cout << "Enter ISBN: ";
+
+  String isbnStr;
+  cin >> isbnStr;
+
+  Book book = library.getBook("i", isbnStr);
+
+  if (book.getISBN().getStr() != "0000000000") {
+    cout << "Book found:" << endl;
+    book.printContent();
+  } else {
+    cout << "Book not found" << endl;
+    return;
+  }
+}
+
+bool Interface::runCommand(String command) {
+  bool run = true;
+
+  if (command == "/add") {
+    addBook();
+  } else if (command == "/remove") {
+    removeBook();
+  } else if (command == "/sort") {
+    sortBooks();
+  } else if (command == "/search") {
+    searchBook();
+  } else if (command == "/book") {
+    printBook();
+  } else if (command == "/exit") {
+    run = false;
+  } else {
+    cout << "Invalid command!" << endl;
+  }
+
+  return run;
+}
+
 void Interface::run() {
   // print welcome message
   cout << "Welcome to the library!" << endl;
@@ -187,28 +254,12 @@ void Interface::run() {
     String command;
     cin >> command;
 
-    switch (getCommandIndex(command)) {
-    case 0: // add book
-      addBook();
-      break;
-    case 1: // remove book
-      removeBook();
-      break;
-    case 2: // sort books
-      sortBooks();
-      break;
-    case 3: // search books
-      break;
-    case 4: // print book
-      break;
-    case 5: // usage
-      break;
-    case 6: // commands
+    if (command == "/help") {
       printAllCommands();
-      break;
-    case 7: // exit
-      run = false;
-      break;
+    } else {
+      run = runCommand(command);
     }
   }
+
+  cout << "Bye!" << endl;
 }

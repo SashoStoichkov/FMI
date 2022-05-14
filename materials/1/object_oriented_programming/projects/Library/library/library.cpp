@@ -34,47 +34,62 @@ bool Library::removeBook(ISBN isbn) {
     return false;
   }
 
-  String filename = "books-db/";
-  filename.append(getBook(isbn).getContentFileName());
-  filename.append(".txt");
-
-  if (remove(filename.getStr()) != 0) {
-    cout << "Error deleting file" << endl;
-    return false;
-  }
-
-  Book *newBooks = new Book[this->numBooks - 1];
-
-  int j = 0;
   for (int i = 0; i < this->numBooks; i++) {
-    if (!(this->books[i].getISBN() == isbn)) {
-      newBooks[j] = this->books[i];
-      j++;
+    if (this->books[i].getISBN() == isbn) {
+      Book *newBooks = new Book[this->numBooks - 1];
+
+      for (int j = 0; j < i; j++) {
+        newBooks[j] = this->books[j];
+      }
+
+      for (int j = i; j < this->numBooks - 1; j++) {
+        newBooks[j] = this->books[j + 1];
+      }
+
+      delete[] this->books;
+      this->books = newBooks;
+      this->numBooks--;
+
+      String filename = "books-db/";
+      filename.append(getBook("i", isbn.getStr()).getContentFileName());
+      filename.append(".txt");
+
+      if (remove(filename.getStr()) != 0) {
+        cout << "Error deleting file" << endl;
+        return false;
+      }
+
+      return true;
     }
   }
 
-  if (j == this->numBooks - 1) {
-    delete[] this->books;
-    this->books = newBooks;
-    this->numBooks--;
-    return true;
-  } else {
-    delete[] newBooks;
-    cout << "Book not found!" << endl;
-    return false;
-  }
+  cout << "Book not found!" << endl;
+  return false;
 }
 
 Book *Library::getBooks() { return this->books; }
 
 int Library::getNumBooks() { return this->numBooks; }
 
-Book Library::getBook(ISBN isbn) {
+Book Library::getBook(String searchBy, String searchFor) {
   Book book;
 
-  for (int i = 0; i < this->numBooks; i++) {
-    if (this->books[i].getISBN() == isbn) {
-      book = this->books[i];
+  if (searchBy == "d") {
+    // search by description substring
+    for (int i = 0; i < this->numBooks; i++) {
+      if (this->books[i].getDescription().toLower().contains(
+              searchFor.toLower())) {
+        book = this->books[i];
+        break;
+      }
+    }
+  } else {
+    for (int i = 0; i < this->numBooks; i++) {
+      if (this->books[i].getAttribute(searchBy).toLower() ==
+          searchFor.toLower()) {
+        book = this->books[i];
+        break;
+      }
     }
   }
 

@@ -19,7 +19,7 @@ public:
   Book *getBooks();
   int getNumBooks();
 
-  Book getBook(ISBN isbn);
+  Book getBook(String searchBy, String searchFor);
 
   Book *sortedBy(String sortBy, bool ascending);
 };

@@ -10,15 +10,14 @@ private:
   String adminPassword;
   Library library;
 
-  String commands[8] = {"/add",  "/remove", "/sort", "/search",
-                        "/book", "/usage",  "/help", "/exit"};
+  static const int NUM_COMMANDS = 7;
 
-  int getCommandIndex(String command);
+  String commands[NUM_COMMANDS] = {"/add",  "/remove", "/sort", "/search",
+                                   "/book", "/help",   "/exit"};
 
   bool enterAdminPassword();
 
   void printAllCommands();
-  void printUsage(String command);
 
   // add book
   void addBook();
@@ -29,11 +28,13 @@ private:
   // sort books
   void sortBooks();
 
-  // search books
-  void searchBooks(String searchBy, String searchFor);
+  // search book
+  void searchBook();
 
   // print book
-  void printBook(ISBN isbn);
+  void printBook();
+
+  bool runCommand(String command);
 
 public:
   Interface(String adminPassword = "");

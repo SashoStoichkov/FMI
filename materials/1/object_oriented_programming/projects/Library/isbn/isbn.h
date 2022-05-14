@@ -13,12 +13,15 @@ private:
   String isbn;
 
   // check if the isbn is valid
+  // https://www.isbn-check.com/ for checking isbn validity for tests and demo
   bool isValid(String isbn);
 
 public:
-  ISBN(String isbn = "");
+  // 007462542X
+  // 0004625420
+  ISBN(String isbn = "0000000000");
 
-  String getISBN();
+  String getStr();
 
   bool operator==(const ISBN &isbn) const;
 };

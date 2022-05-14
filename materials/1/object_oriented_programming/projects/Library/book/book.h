@@ -9,13 +9,13 @@ private:
   String author;
   String title;
   String contentFileName;
-  String shortDescription;
+  String description;
   int rating;
   ISBN isbn;
 
 public:
   Book(String author = "", String title = "", String contentFileName = "",
-       String shortDescription = "", int rating = 0, ISBN isbn = ISBN("007462542X"));
+       String description = "", int rating = 0, ISBN isbn = ISBN());
 
   bool operator==(const Book &book) const;
 
@@ -28,7 +28,7 @@ public:
   String getAuthor();
   String getTitle();
   String getContentFileName();
-  String getShortDescription();
+  String getDescription();
   int getRating();
   ISBN getISBN();
 
