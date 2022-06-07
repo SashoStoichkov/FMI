@@ -1,7 +1,7 @@
 #ifndef __HELP_H__
 #define __HELP_H__
 
-#include "../../Command/Command.h"
+#include "../../../Command/Command.h"
 
 class Help : public Command {
 public:

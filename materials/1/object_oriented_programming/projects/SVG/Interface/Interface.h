@@ -1,7 +1,7 @@
 #ifndef __INTERFACE_H__
 #define __INTERFACE_H__
 
-#include "../InterfaceCommands/InterfaceCommands.h"
+#include "./InterfaceCommands/InterfaceCommands.h"
 
 class Interface {
 private:

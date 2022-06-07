@@ -14,8 +14,6 @@ bool Open::execute() {
     return false;
   }
 
-  print();
-
   if (args.size() == 0) {
     cout << "Open: no file name given" << endl;
     return false;
@@ -25,26 +23,20 @@ bool Open::execute() {
   } else {
     cout << "Open: opening file " << args[0] << endl;
 
-    // open file
-    fstream oFile(args[0], ios::out);
+    // check if file exists
+    ifstream file(args[0]);
 
-    // check if file is empty
-    if (oFile.peek() == ifstream::traits_type::eof()) {
-      cout << "Open: file " << args[0] << " doesn't exist, creating it" << endl;
+    if (!file.is_open()) {
+      cout << "Open: file not found. Creating file" << endl;
 
-      fstream iFile(args[0], ios::in);
-
-      iFile << "<?xml version=\"1.0\" standalone=\"no\"?>" << endl;
-      iFile << "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" "
-              "\"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">"
-           << endl;
-      iFile << "<svg></svg>" << endl;
-
-      iFile.close();
+      // create file
+      ofstream file(args[0]);
+      file.close();
     }
 
-    // close file
-    oFile.close();
+    file.close();
+
+    cout << "Open: successfully opened " << args[0] << endl;
 
     Command::fileOpen = true;
     Command::prompt = "> " + args[0] + " > ";

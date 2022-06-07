@@ -1,7 +1,7 @@
 #ifndef __CLOSE_H__
 #define __CLOSE_H__
 
-#include "../../Command/Command.h"
+#include "../../../Command/Command.h"
 
 class Close : public Command {
 public:
