@@ -22,7 +22,7 @@ public:
   Shape(const Shape &other);
 
   // destructor
-  ~Shape();
+  virtual ~Shape();
 
   // copy assignment
   Shape &operator=(const Shape &other);
@@ -34,6 +34,7 @@ public:
 
   virtual void translate(int dx, int dy) = 0;
   virtual void print() const = 0;
+  virtual bool isWithin(Shape *shape) const = 0;
 };
 
 #endif // __SHAPE_H__

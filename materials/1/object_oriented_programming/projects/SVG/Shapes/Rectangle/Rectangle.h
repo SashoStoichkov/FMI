@@ -21,6 +21,12 @@ public:
 
   void translate(int dx, int dy);
   void print() const;
+  bool isWithin(Shape *shape) const;
+
+  int getX() const;
+  int getY() const;
+  unsigned int getWidth() const;
+  unsigned int getHeight() const;
 };
 
 #endif // __RECTANGLE_H__

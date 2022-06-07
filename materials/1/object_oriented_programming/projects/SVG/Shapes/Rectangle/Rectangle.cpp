@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+#include "../Circle/Circle.h"
 #include "Rectangle.h"
 
 Rectangle::Rectangle(int x, int y, unsigned int width, unsigned int height,
@@ -33,6 +34,30 @@ void Rectangle::print() const {
   cout << "rectangle " << x << " " << y << " " << width << " " << height << " "
        << fill << endl;
 }
+
+bool Rectangle::isWithin(Shape *shape) const {
+  if (shape->getName() == "rect") {
+    Rectangle *rect = static_cast<Rectangle *>(shape);
+    return x >= rect->x && x <= rect->x + rect->width && y >= rect->y &&
+           y <= rect->y + rect->height;
+  } else if (shape->getName() == "circle") {
+    Circle *circle = static_cast<Circle *>(shape);
+    return x >= circle->getCx() - circle->getR() &&
+           x <= circle->getCx() + circle->getR() &&
+           y >= circle->getCy() - circle->getR() &&
+           y <= circle->getCy() + circle->getR();
+  } else {
+    return false;
+  }
+}
+
+int Rectangle::getX() const { return x; }
+
+int Rectangle::getY() const { return y; }
+
+unsigned int Rectangle::getWidth() const { return width; }
+
+unsigned int Rectangle::getHeight() const { return height; }
 
 ostream &operator<<(ostream &os, const Rectangle &rectangle) {
   os << "<" << rectangle.name << " x=\"" << rectangle.x << "\" y=\""

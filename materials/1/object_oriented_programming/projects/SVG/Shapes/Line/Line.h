@@ -20,6 +20,7 @@ public:
 
   void translate(int dx, int dy);
   void print() const;
+  bool isWithin(Shape *shape) const;
 };
 
 #endif // __LINE_H__

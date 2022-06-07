@@ -19,6 +19,11 @@ public:
 
   void translate(int dx, int dy);
   void print() const;
+  bool isWithin(Shape *shape) const;
+
+  int getCx() const;
+  int getCy() const;
+  unsigned int getR() const;
 };
 
 #endif // __CIRCLE_H__

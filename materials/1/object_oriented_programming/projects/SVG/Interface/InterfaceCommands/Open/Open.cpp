@@ -3,6 +3,7 @@
 using namespace std;
 
 #include "Open.h"
+#include "../../../File/File.h"
 
 Open::Open(const string &line) : Command(line) {}
 
@@ -32,6 +33,9 @@ bool Open::execute() {
       // create file
       ofstream file(args[0]);
       file.close();
+    // } else {
+    //   File *f = new File(args[0]);
+    //   f->load();
     }
 
     file.close();
