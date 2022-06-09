@@ -3,7 +3,6 @@
 using namespace std;
 
 #include "Open.h"
-#include "../../../File/File.h"
 
 Open::Open(const string &line) : Command(line) {}
 
@@ -21,6 +20,9 @@ bool Open::execute() {
   } else if (args.size() > 1) {
     cout << "Open: too many arguments (" << args.size() << " > 1)" << endl;
     return false;
+  } else if (!Command::checkExtension(args[0], "svg")) {
+    cout << "Open: file extension is not .svg" << endl;
+    return false;
   } else {
     cout << "Open: opening file " << args[0] << endl;
 
@@ -33,9 +35,9 @@ bool Open::execute() {
       // create file
       ofstream file(args[0]);
       file.close();
-    // } else {
-    //   File *f = new File(args[0]);
-    //   f->load();
+    } else {
+      Command::file = File(args[0]);
+      Command::file.load();
     }
 
     file.close();

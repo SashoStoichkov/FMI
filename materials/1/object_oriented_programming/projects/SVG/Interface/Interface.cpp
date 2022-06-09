@@ -3,6 +3,7 @@ using namespace std;
 
 #include "Interface.h"
 
+File Command::file;
 bool Command::fileOpen = false;
 string Command::prompt = "> ";
 

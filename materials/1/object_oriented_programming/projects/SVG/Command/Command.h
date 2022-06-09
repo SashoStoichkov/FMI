@@ -1,6 +1,8 @@
 #ifndef __COMMAND_H__
 #define __COMMAND_H__
 
+#include "../File/File.h"
+
 #include <string>
 #include <vector>
 using namespace std;
@@ -39,6 +41,9 @@ public:
 
   virtual bool execute() = 0;
 
+  static bool checkExtension(const string &path, const string &extension);
+
+  static File file;
   static bool fileOpen;
   static string prompt;
 };

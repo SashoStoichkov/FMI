@@ -5,7 +5,8 @@
 
 class Interface {
 private:
-  vector<Command *> availableCommands = {new Help(), new Open(), new Close()};
+  vector<Command *> availableCommands = {new Help(), new Open(), new Save(),
+                                         new SaveAs(), new Close()};
 
 public:
   void run();
