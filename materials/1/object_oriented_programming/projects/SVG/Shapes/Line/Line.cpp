@@ -27,6 +27,22 @@ Line::Line(int x1, int y1, int x2, int y2, string stroke)
   }
 }
 
+int Line::getX1() const { return this->x1; }
+
+int Line::getY1() const { return this->y1; }
+
+int Line::getX2() const { return this->x2; }
+
+int Line::getY2() const { return this->y2; }
+
+string Line::getStroke() const { return this->stroke; }
+
+string Line::toString() const {
+  return "<line x1=\"" + to_string(this->x1) + "\" y1=\"" +
+         to_string(this->y1) + "\" x2=\"" + to_string(this->x2) + "\" y2=\"" +
+         to_string(this->y2) + "\" stroke=\"" + this->stroke + "\" />";
+}
+
 void Line::translate(int dx, int dy) {
   x1 += dx;
   y1 += dy;

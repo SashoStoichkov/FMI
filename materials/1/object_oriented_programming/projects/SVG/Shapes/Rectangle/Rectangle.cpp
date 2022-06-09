@@ -25,6 +25,12 @@ Rectangle::Rectangle(int x, int y, unsigned int width, unsigned int height,
   }
 }
 
+string Rectangle::toString() const {
+  return "<rect x=\"" + to_string(this->x) + "\" y=\"" + to_string(this->y) +
+         "\" width=\"" + to_string(this->width) + "\" height=\"" +
+         to_string(this->height) + "\" fill=\"" + this->fill + "\" />";
+}
+
 void Rectangle::translate(int dx, int dy) {
   x += dx;
   y += dy;

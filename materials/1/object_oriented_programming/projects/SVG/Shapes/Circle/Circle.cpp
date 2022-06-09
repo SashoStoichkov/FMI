@@ -25,6 +25,12 @@ Circle::Circle(int cx, int cy, unsigned int r, string fill)
   }
 }
 
+string Circle::toString() const {
+  return "<circle cx=\"" + to_string(this->cx) + "\" cy=\"" +
+         to_string(this->cy) + "\" r=\"" + to_string(this->r) + "\" fill=\"" +
+         this->fill + "\" />";
+}
+
 void Circle::translate(int dx, int dy) {
   cx += dx;
   cy += dy;

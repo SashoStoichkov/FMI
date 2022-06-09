@@ -31,6 +31,10 @@ File &File::operator=(const File &other) {
   return *this;
 }
 
+string File::getPath() const { return this->path; }
+
+vector<Shape *> File::getShapes() const { return this->shapes; }
+
 void File::addShape(Shape *shape) { this->shapes.push_back(shape); }
 
 void File::removeShape(int index) {
@@ -195,4 +199,30 @@ void File::load() {
   cout << "Load: Successfully loaded " << path << endl;
 }
 
-void File::save(string path) {}
+void File::save(string path) {
+  if (path == "") {
+    path = this->path;
+  }
+
+  ofstream file(path);
+
+  if (!file.is_open()) {
+    cout << "Save: File not found" << endl;
+    return;
+  }
+
+  file << "<?xml version=\"1.0\" standalone=\"no\"?>" << endl;
+  file << "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"" << endl;
+  file << " \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">" << endl;
+  file << "<svg>" << endl;
+
+  for (auto shape : this->shapes) {
+    file << " " << shape->toString() << endl;
+  }
+
+  file << "</svg>" << endl;
+
+  file.close();
+
+  cout << "Save: Successfully saved " << path << endl;
+}

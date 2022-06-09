@@ -19,6 +19,7 @@ public:
   // operator<<
   friend ostream &operator<<(ostream &os, const Rectangle &rectangle);
 
+  string toString() const;
   void translate(int dx, int dy);
   void print() const;
   bool isWithin(Shape *shape) const;

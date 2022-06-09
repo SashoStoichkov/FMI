@@ -18,6 +18,14 @@ public:
   // operator<<
   friend ostream &operator<<(ostream &os, const Line &line);
 
+  // getters
+  int getX1() const;
+  int getY1() const;
+  int getX2() const;
+  int getY2() const;
+  string getStroke() const;
+
+  string toString() const;
   void translate(int dx, int dy);
   void print() const;
   bool isWithin(Shape *shape) const;

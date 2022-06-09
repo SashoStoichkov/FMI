@@ -28,6 +28,9 @@ public:
   // copy assignment
   File &operator=(const File &other);
 
+  string getPath() const;
+  vector<Shape *> getShapes() const;
+
   // add shape
   void addShape(Shape *shape);
 

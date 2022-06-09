@@ -32,6 +32,7 @@ public:
 
   string getName() const;
 
+  virtual string toString() const = 0;
   virtual void translate(int dx, int dy) = 0;
   virtual void print() const = 0;
   virtual bool isWithin(Shape *shape) const = 0;
