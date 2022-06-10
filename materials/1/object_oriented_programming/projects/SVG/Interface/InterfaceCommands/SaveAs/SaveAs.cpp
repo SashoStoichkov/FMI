@@ -17,7 +17,7 @@ bool SaveAs::execute() {
   } else if (args.size() > 1) {
     cout << "SaveAs: too many arguments (" << args.size() << " > 1)" << endl;
     return false;
-  } else if (!Command::checkExtension(args[0], "svg")){
+  } else if (args[0].substr(args[0].find_last_of('.') + 1) != "svg") {
     cout << "SaveAs: file extension is not .svg" << endl;
     return false;
   } else {

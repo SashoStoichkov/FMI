@@ -41,8 +41,6 @@ public:
 
   virtual bool execute() = 0;
 
-  static bool checkExtension(const string &path, const string &extension);
-
   static File file;
   static bool fileOpen;
   static string prompt;

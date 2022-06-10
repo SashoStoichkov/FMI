@@ -68,11 +68,3 @@ void Command::print() {
 string Command::getName() const { return name; }
 
 vector<string> Command::getArgs() const { return args; }
-
-bool checkExtension(const string &path, const string &extension) {
-  size_t pos = path.find_last_of('.');
-  if (pos == string::npos) {
-    return false;
-  }
-  return path.substr(pos + 1) == extension;
-}
