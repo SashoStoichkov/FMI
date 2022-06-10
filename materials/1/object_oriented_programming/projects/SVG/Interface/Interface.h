@@ -8,7 +8,7 @@ class Interface {
 private:
   vector<Command *> availableCommands = {new Help(),   new Open(),  new Save(),
                                          new SaveAs(), new Close(), new Print(),
-                                         new Create()};
+                                         new Create(), new Erase()};
 
 public:
   void run();

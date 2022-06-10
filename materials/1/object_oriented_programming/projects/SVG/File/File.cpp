@@ -38,16 +38,16 @@ vector<Shape *> File::getShapes() const { return this->shapes; }
 void File::addShape(Shape *shape) { this->shapes.push_back(shape); }
 
 void File::removeShape(int index) {
-  if (index < 0 || index >= this->shapes.size()) {
-    cout << "Erase: There is no figure number " << index + 1 << "!" << endl;
+  if (index <= 0 || index > this->shapes.size()) {
+    cout << "Erase: There is no figure number " << index << "!" << endl;
     return;
   }
 
-  cout << "Erase: Erased a " << this->shapes[index]->getName() << "("
-       << index + 1 << ")" << endl;
+  cout << "Erase: Erased a " << this->shapes[index - 1]->getName() << "("
+       << index << ")" << endl;
 
-  delete this->shapes[index];
-  this->shapes.erase(this->shapes.begin() + index);
+  delete this->shapes[index - 1];
+  this->shapes.erase(this->shapes.begin() + index - 1);
 }
 
 void File::translateShape(int index, int dx, int dy) {
