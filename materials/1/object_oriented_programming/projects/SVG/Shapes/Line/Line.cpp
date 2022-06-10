@@ -12,19 +12,13 @@ Line::Line(int x1, int y1, int x2, int y2, string stroke)
   for (auto &color : Shape::availableColors) {
     if (color == stroke) {
       this->stroke = color;
-      break;
+      return;
     }
   }
 
-  if (this->stroke.empty()) {
-    cout << "Color " << stroke << " is not available. Generating random color."
-         << endl;
-
-    srand(time(NULL));
-
-    this->stroke =
-        Shape::availableColors[rand() % Shape::availableColors.size()];
-  }
+  cout << "Generating random color." << endl;
+  srand(time(NULL));
+  this->stroke = Shape::availableColors[rand() % Shape::availableColors.size()];
 }
 
 int Line::getX1() const { return this->x1; }

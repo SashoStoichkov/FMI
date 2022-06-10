@@ -11,18 +11,13 @@ Circle::Circle(int cx, int cy, unsigned int r, string fill)
   for (auto &color : Shape::availableColors) {
     if (color == fill) {
       this->fill = color;
-      break;
+      return;
     }
   }
 
-  if (this->fill.empty()) {
-    cout << "Color " << fill << " is not available. Generating random color."
-         << endl;
-
-    srand(time(NULL));
-
-    this->fill = Shape::availableColors[rand() % Shape::availableColors.size()];
-  }
+  cout << "Generating random color." << endl;
+  srand(time(NULL));
+  this->fill = Shape::availableColors[rand() % Shape::availableColors.size()];
 }
 
 string Circle::toString() const {
