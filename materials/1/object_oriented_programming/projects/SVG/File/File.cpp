@@ -58,16 +58,15 @@ void File::translateShape(int index, int dx, int dy) {
 
     cout << "Translate: Translated all figures" << endl;
   } else {
-    if (index < 0 || index >= this->shapes.size()) {
-      cout << "Translate: There is no figure number " << index + 1 << "!"
-           << endl;
+    if (index <= 0 || index > this->shapes.size()) {
+      cout << "Translate: There is no figure number " << index << "!" << endl;
       return;
     }
 
-    this->shapes[index]->translate(dx, dy);
+    this->shapes[index - 1]->translate(dx, dy);
 
-    cout << "Translate: Translated a " << this->shapes[index]->getName() << "("
-         << index + 1 << ")" << endl;
+    cout << "Translate: Translated a " << this->shapes[index - 1]->getName()
+         << "(" << index << ")" << endl;
   }
 }
 
