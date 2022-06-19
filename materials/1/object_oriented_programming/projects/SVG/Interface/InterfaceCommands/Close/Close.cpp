@@ -11,10 +11,15 @@ bool Close::execute() {
     return false;
   }
 
-  Command::fileOpen = false;
-  Command::prompt = "> ";
+  if (args.size() != 0) {
+    cout << "Close: too many arguments (" << args.size() << " > 0)" << endl;
+    return false;
+  } else {
+    Command::fileOpen = false;
+    Command::prompt = "> ";
 
-  cout << "Close: file successfully closed" << endl;
+    cout << "Close: file successfully closed" << endl;
 
-  return true;
+    return true;
+  }
 }
