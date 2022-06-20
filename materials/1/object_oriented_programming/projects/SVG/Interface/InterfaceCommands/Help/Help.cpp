@@ -16,7 +16,7 @@ bool Help::execute() {
     cout << "- save \t\t saves the currently open file" << endl;
     cout << "- saveas <file>  saves the currently open file in <file>" << endl;
     cout << "- help \t\t prints this information" << endl;
-    cout << "- exit \t\t exists the program" << endl;
+    cout << "- exit \t\t exits the program" << endl;
 
     cout << endl;
 
