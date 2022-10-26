@@ -37,59 +37,69 @@ obj.temp = 4;
 obj.temp = 5;
 
 var archive = obj.getArchive();
-archive.push(4, 5, 6);
 console.log(obj.getArchive());
 
-// // var result = false || {};
+// TODO: Защо този ред не прави нищо?
+archive.push(4, 5, 6);
 
-// // if (true) {
+console.log(obj.getArchive());
 
-// // } else {
+// ============================================================================
 
-// // }
+// var result = false || {};
 
-// // function test(arg1) {
-// //   arg1 = arg1 || null;
-// //   return arg1;
-// // }
-
-// // function createPerson(name) {
-// //   name = name || 'Ivan Ivanov';
-// //   return { name: name };
-// // }
-
-// function createSomething(logPersonName) {
-//   return {
-//     name: "Test",
-//     logPersonName: logPersonName,
-//   };
+// if (true) {
+// } else {
 // }
 
-// function logName() {
-//   console.log(this.name);
+// function test(arg1) {
+//   arg1 = arg1 || null;
+//   return arg1;
 // }
 
-// var user = createPerson();
-// user.logName = logName;
-// // user.logName();
+// ============================================================================
 
-// var result = createSomething(user.logName.bind(user));
-// result.logPersonName();
+function createPerson(name) {
+  name = name || "Ivan Ivanov";
+  return { name: name };
+}
 
-// // function test(arg1, arg2, arg3) {
-// //   console.log(this, arg1, arg2, arg3);
-// // }
+function createSomething(logPersonName) {
+  return {
+    name: "Test",
+    logPersonName: logPersonName,
+  };
+}
 
-// // var fn = test.bind(1000, 1, 2);
+function logName() {
+  console.log(this.name);
+}
 
-// // test.call(1000, 1, 2, 3);
-// // test.apply(1000, [1, 2, 3]);
+var user = createPerson();
 
-// // var obj2 = {
-// //   test1: fn
-// // };
+// TODO: Какво точно прави този ред?
+user.logName = logName;
+// user.logName();
 
-// // obj2.test1(100, 200, 300);
+var result = createSomething(user.logName.bind(user));
+result.logPersonName();
+
+// ============================================================================
+
+// function test(arg1, arg2, arg3) {
+//   console.log(this, arg1, arg2, arg3);
+// }
+
+// var fn = test.bind(1000, 1, 2);
+
+// test.call(1000, 1, 2, 3);
+// test.apply(1000, [1, 2, 3]);
+
+// var obj2 = {
+//   test1: fn
+// };
+
+// obj2.test1(100, 200, 300);
 
 // function test() {
 //   var args = [].slice.call(arguments);
@@ -99,26 +109,33 @@ console.log(obj.getArchive());
 // test(1, 2, 3, 4);
 // test.length;
 
-// // var testCr = curry(test);
-// // testCr(1)(2)(3)(4) - this is currying - https://en.wikipedia.org/wiki/Currying;
-// // testCr(1)(2,3)(4);
+// ============================================================================
 
-// function compose() {
-//   var fns = [].slice.call(arguments);
-//   return function (x) {
-//     fns.forEach(function (fn, index, fns) {
-//       x = fn(x);
-//     });
-//     // fns.map(function(fn) {
-//     //   x = fn(x)
-//     //   return ;
-//     // });
-//     // for (var i = 0; i < fns.length; i++) {
-//     //   x = fns[i](x);
-//     // }
-//     return x;
-//   };
-// }
+// var testCr = curry(test);
+// testCr(1)(2)(3)(4) // - this is currying - https://en.wikipedia.org/wiki/Currying;
+// testCr(1)(2,3)(4);
+
+// ============================================================================
+
+function compose() {
+  var fns = [].slice.call(arguments);
+  return function (x) {
+    // fns.forEach(function (fn, index, fns) {
+    //   x = fn(x);
+    // });
+
+    fns.map(function (fn) {
+      x = fn(x);
+      return;
+    });
+
+    // for (var i = 0; i < fns.length; i++) {
+    //   x = fns[i](x);
+    // }
+
+    return x;
+  };
+}
 
 // function createEmployeeFactory(salary) {
 //   return function createEmployee(person) {
@@ -134,10 +151,22 @@ console.log(obj.getArchive());
 
 // console.log(createUserEmployeeWith4000Salary("Ivan"));
 
-// // var fn = compose(function (a) { return a + 1 }, function (a) { return a * a; });
-// // fn(1);
+// ============================================================================
 
-// [1, 2, 3, 4].reduce(function (acc, currElement) {
+// var fn = compose(
+//   function (a) {
+//     return a + 1;
+//   },
+//   function (a) {
+//     return a * a;
+//   }
+// );
+// var res = fn(1);
+// console.log(res);
+
+// ============================================================================
+
+// var res = [1, 2, 3, 4].reduce(function (acc, currElement) {
 //   return acc + currElement;
 // }, 0);
 
@@ -146,6 +175,8 @@ console.log(obj.getArchive());
 // }, []);
 
 // console.log(res);
+
+// ============================================================================
 
 // var res2 = [
 //   ["prop1", 1],
@@ -161,13 +192,19 @@ console.log(obj.getArchive());
 
 // console.log(res2);
 
-// [1, 2, 3, 4]
+// ============================================================================
+
+// var res3 = [1, 2, 3, 4]
 //   .map(function (x) {
 //     return x + 2;
 //   })
 //   .map(function (x) {
 //     return x * 2;
 //   });
+
+// console.log(res3);
+
+// ============================================================================
 
 // function mixin(obj1, obj2) {
 //   var result = {};
@@ -179,6 +216,8 @@ console.log(obj.getArchive());
 //   }
 //   return result;
 // }
+
+// ============================================================================
 
 // var prototype = {
 //   getName: function () {
@@ -200,15 +239,17 @@ console.log(obj.getArchive());
 // }
 
 // var a = createAnimal("a", 10, "test");
-// a.getAge();
+// console.log(a.breed);
 
 // function createPerson(name, age) {
 //   var personWithPrototype = Object.create(prototype);
 //   personWithPrototype.name = name;
 //   personWithPrototype.age = age;
 
-//   return person;
+//   return personWithPrototype;
 // }
 
 // var a = createPerson("a", 10);
-// a.getAge();
+// console.log(a);
+
+// ============================================================================
