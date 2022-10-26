@@ -1,28 +1,28 @@
 // ============================================================================
 
-// var array = [10, 80, 30, 90, 40, 50, 70];
+var array = [10, 80, 30, 90, 40, 50, 70];
 
-// function quickSort(array) {
-//   if (array.length <= 1) {
-//     return array;
-//   }
+function quickSort(array) {
+  if (array.length <= 1) {
+    return array;
+  }
 
-//   var pivot = array[0];
-//   var left = [];
-//   var right = [];
+  var pivot = array[0];
+  var left = [];
+  var right = [];
 
-//   for (var i = 1; i < array.length; i++) {
-//     if (array[i] < pivot) {
-//       left.push(array[i]);
-//     } else {
-//       right.push(array[i]);
-//     }
-//   }
+  for (var i = 1; i < array.length; i++) {
+    if (array[i] < pivot) {
+      left.push(array[i]);
+    } else {
+      right.push(array[i]);
+    }
+  }
 
-//   return quickSort(left).concat(pivot, quickSort(right));
-// }
+  return quickSort(left).concat(pivot, quickSort(right));
+}
 
-// console.log(quickSort(array));
+console.log(quickSort(array));
 
 // ============================================================================
 
@@ -80,9 +80,6 @@ function expressionResult(expr) {
 
   return expr[0];
 }
-
-// "3 + 2 = 5"
-// "7 - 3 * 2 + 1 = 4 * 2 + 1 = 8 + 1 = 9"
 
 var input = process.argv[2];
 console.log(input);
